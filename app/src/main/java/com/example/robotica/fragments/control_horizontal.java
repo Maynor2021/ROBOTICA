@@ -324,4 +324,16 @@ public class control_horizontal extends Fragment implements View.OnClickListener
         });
     }
 
+    public void vibrarlargo2() {
+        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null && vibrator.hasVibrator()) {
+            // Duración de la vibración en milisegundos
+            final int vibracionDuracion = 300;
+            // Hacer vibrar el dispositivo
+            vibrator.vibrate(vibracionDuracion);
+        }
+    }
+
+
+
 }
