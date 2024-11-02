@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F2F2F2"
+        android:backgroundTint="@color/white"
+        tools:context=".MainActivity">
+
+        <FrameLayout
+            android:id="@+id/contenedor"
+            android:layout_width="415dp"
+            android:layout_height="157dp"
+            android:layout_marginTop="2dp"
+            android:background="#528A5F"
+            android:backgroundTint="#A68080"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/bluetooth_vertical"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="270dp"
+                android:layout_marginBottom="119dp"
+                android:background="@drawable/boton_shape"
+                android:outlineAmbientShadowColor="#ffffff"
+                android:src="@drawable/bluetooth" />
+
+            <ImageButton
+                android:id="@+id/robotvoz"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="400dp"
+                android:background="@drawable/boton_shape"
+                android:outlineAmbientShadowColor="#ffffff"
+                android:src="@drawable/bot" />
+
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/stop_voz"
+            android:layout_width="134dp"
+            android:layout_height="126dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/boton_shape"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:scaleType="fitCenter"
+            android:src="@drawable/stop"
+            app:layout_constraintEnd_toStartOf="@+id/start_voz"
+            app:layout_constraintStart_toEndOf="@+id/emergency_voz"
+            app:layout_constraintTop_toBottomOf="@+id/contenedor" />
+
+        <ImageButton
+            android:id="@+id/emergency_voz"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/boton_shape"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:src="@drawable/emergency"
+            app:layout_constraintEnd_toStartOf="@+id/stop_voz"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contenedor" />
+
+        <ImageButton
+            android:id="@+id/focovoz"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="59dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/boton_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/foco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Upvoz"
+            app:layout_constraintTop_toBottomOf="@+id/start_voz" />
+
+        <SeekBar
+            android:id="@+id/velocidadvoz"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="153dp"
+            android:layout_height="128dp"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/boton_shape"
+            android:backgroundTint="#C1D0CE"
+            android:progressTint="#6EAADB"
+            app:layout_constraintBottom_toTopOf="@+id/downvertical"
+            app:layout_constraintEnd_toStartOf="@+id/rigthvertical"
+            app:layout_constraintStart_toEndOf="@+id/leftvertical"
+            app:layout_constraintTop_toBottomOf="@+id/Upvoz" />
+
+        <ImageButton
+            android:id="@+id/start_voz"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/boton_shape"
+            android:outlineAmbientShadowColor="#ffffff"
+            android:src="@drawable/go"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/stop_voz"
+            app:layout_constraintTop_toBottomOf="@+id/contenedor" />
+
+        <ImageButton
+            android:id="@+id/Upvoz"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="111dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/boton_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrowwhiteup"
+            app:layout_constraintBottom_toTopOf="@+id/velocidadvoz"
+            app:layout_constraintEnd_toStartOf="@+id/focovoz"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stop_voz" />
+
+        <ImageButton
+            android:id="@+id/rigthvertical"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="98dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/boton_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrowwhiteright"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/velocidadvoz"
+            app:layout_constraintTop_toBottomOf="@+id/focovoz" />
+
+        <ImageButton
+            android:id="@+id/leftvertical"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="261dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="227dp"
+            android:background="@drawable/boton_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arroleftwhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/velocidadvoz"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emergency_voz" />
+
+        <ImageButton
+            android:id="@+id/downvertical"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="98dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="109dp"
+            android:layout_marginBottom="90dp"
+            android:background="@drawable/boton_shape"
+            android:scaleType="fitCenter"
+            android:src="@drawable/arrowwhitedown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/velocidadvoz" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
