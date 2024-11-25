@@ -24,6 +24,7 @@ import com.example.robotica.R;
 public class control_horizontal extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     ImageButton botonOn;
     ImageButton botonOff;
+    ImageButton close;
     ImageButton up;
     ImageButton left;
     ImageButton right;
