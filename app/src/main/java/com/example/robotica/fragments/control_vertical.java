@@ -49,7 +49,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
     ImageButton down;
     ImageButton stop;
     ImageButton emergency;
-    ImageButton bluetooth;
+    ImageButton blt;
     ImageButton luces;
     ImageButton robot;
     SeekBar velocidad;
@@ -104,7 +104,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         down = view.findViewById(R.id.downvertical);
         stop = view.findViewById(R.id.stop_voz);
         emergency = view.findViewById(R.id.emergency_voz);
-        bluetooth = view.findViewById(R.id.bluetooth_vertical);
+        blt = view.findViewById(R.id.bluetooth_vertical);
         luces = view.findViewById(R.id.focovoz);
         robot = view.findViewById(R.id.robotvoz);
         velocidad = view.findViewById(R.id.velocidadvoz);
@@ -121,12 +121,13 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         down.setOnClickListener(this);
         stop.setOnClickListener(this);
         luces.setOnClickListener(this);
-        emergency.setOnClickListener(this);
-        bluetooth.setOnClickListener(this);
+        blt.setOnClickListener(this);
         robot.setOnClickListener(this);
         velocidad.setOnClickListener(this);
 
         robot.setOnLongClickListener(this);
+        emergency.setOnLongClickListener(this);
+        blt.setOnLongClickListener(this);
 
     }
 
@@ -171,10 +172,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             cambiar_imagen(stop);
             vibrarlargo();
         }
-        if (v == emergency) {
-            cambiar_imagen(emergency);
-            vibrarlargo();
-        }
+
         if (v == robot)
         {
             popup(robot);
@@ -194,7 +192,11 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             vibrarlargo();
 
         }
-        if (view==bluetooth)
+        if (view == emergency) {
+            cambiar_imagen(emergency);
+            vibrarlargo();
+        }
+        if (view== blt)
         {
             discoverDevices();
             vibrarlargo();
@@ -408,6 +410,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             }
         });
     }
+
     private boolean hasPermissions (Context context)
     {
         return ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED &&
@@ -417,6 +420,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
                 ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED;
     }
+
 
     private void requestPermissions ()
     {
@@ -458,6 +462,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             }
         }
     };
+
 
 
 
