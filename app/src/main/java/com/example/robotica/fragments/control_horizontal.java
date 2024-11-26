@@ -72,7 +72,7 @@ public class control_horizontal extends Fragment implements View.OnClickListener
         bluetooth = view.findViewById(R.id.bluetooth_vertical);
         luces=view.findViewById(R.id.focovoz);
         robot=view.findViewById(R.id.robotvoz);
-        velocidad=view.findViewById(R.id.velocidadvoz);
+        velocidad=view.findViewById(R.id.velocidad);
 
 
 

@@ -94,7 +94,7 @@
             app:layout_constraintTop_toBottomOf="@+id/start_voz" />
 
         <SeekBar
-            android:id="@+id/velocidadvoz"
+            android:id="@+id/velocidad"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="153dp"
             android:layout_height="128dp"
@@ -104,7 +104,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/boton_shape"
-            android:backgroundTint="#C1D0CE"
+
             android:progressTint="#6EAADB"
             app:layout_constraintBottom_toTopOf="@+id/downvertical"
             app:layout_constraintEnd_toStartOf="@+id/rigthvertical"
@@ -136,7 +136,7 @@
             android:background="@drawable/boton_shape"
             android:scaleType="fitCenter"
             android:src="@drawable/arrowwhiteup"
-            app:layout_constraintBottom_toTopOf="@+id/velocidadvoz"
+            app:layout_constraintBottom_toTopOf="@+id/velocidad"
             app:layout_constraintEnd_toStartOf="@+id/focovoz"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stop_voz" />
@@ -152,7 +152,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/arrowwhiteright"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/velocidadvoz"
+            app:layout_constraintStart_toEndOf="@+id/velocidad"
             app:layout_constraintTop_toBottomOf="@+id/focovoz" />
 
         <ImageButton
@@ -167,7 +167,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/arroleftwhite"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/velocidadvoz"
+            app:layout_constraintEnd_toStartOf="@+id/velocidad"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emergency_voz" />
 
@@ -185,7 +185,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/velocidadvoz" />
+            app:layout_constraintTop_toBottomOf="@+id/velocidad" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

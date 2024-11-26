@@ -107,7 +107,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         blt = view.findViewById(R.id.bluetooth_vertical);
         luces = view.findViewById(R.id.focovoz);
         robot = view.findViewById(R.id.robotvoz);
-        velocidad = view.findViewById(R.id.velocidadvoz);
+        velocidad = view.findViewById(R.id.velocidad);
 
 
     }
@@ -166,7 +166,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         }
         if (v == velocidad) {
             velocidad();
-            vibrarCorto();
+            vibrarlargo();
         }
         if (v == stop) {
             cambiar_imagen(stop);
@@ -176,6 +176,10 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         if (v == robot)
         {
             popup(robot);
+            vibrarCorto();
+        }
+        if(v==blt){
+            discoverDevices();
             vibrarCorto();
         }
 
