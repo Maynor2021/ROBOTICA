@@ -96,11 +96,11 @@ public class control_voz extends Fragment implements View.OnClickListener, View.
     //Metodo donde se asignan los elementos de la interfaz de usuario a las variables definidas
     private void variables_botones(View view)
     {
-        robot = view.findViewById(R.id.robotvoz);
-        bluetooth = view.findViewById(R.id.bluetooth_vertical);
-        estop = view.findViewById(R.id.stop_voz);
-        stop = view.findViewById(R.id.stop_voz);
-        start = view.findViewById(R.id.start_voz);
+        robot = view.findViewById(R.id.robot);
+        bluetooth = view.findViewById(R.id.blt_voz);
+        estop = view.findViewById(R.id.stop);
+
+        start = view.findViewById(R.id.start);
         voz = view.findViewById(R.id.mic);
         luces = view.findViewById(R.id.focovoz);
         velocidad = view.findViewById(R.id.velocidad);
@@ -128,6 +128,12 @@ public class control_voz extends Fragment implements View.OnClickListener, View.
     {
         if (v == bluetooth)
         {
+            vibracio.vibrarCorto();
+            checkAndDiscoverDevices();
+        }
+        if (v == estop)
+        {
+            cambiar_imagenes(estop);
 
         }
         if (v == stop)
@@ -152,11 +158,7 @@ public class control_voz extends Fragment implements View.OnClickListener, View.
     @Override
     public boolean onLongClick(View v)
     {
-        if (v == bluetooth)
-        {
-            discoverDevices();
-           vibracio.vibrarCorto();
-        }
+
 
         if (v == estop)
         {

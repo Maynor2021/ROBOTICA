@@ -24,22 +24,13 @@
             android:background="#528A5F"
             android:backgroundTint="#A68080"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageButton
-                android:id="@+id/bluetooth_vertical"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="270dp"
-                android:layout_marginBottom="119dp"
-                android:background="@drawable/boton_shape"
-                android:outlineAmbientShadowColor="#ffffff"
-                android:src="@drawable/bluetooth" />
-
-            <ImageButton
-                android:id="@+id/robotvoz"
-                android:layout_width="123dp"
+                android:id="@+id/robot"
+                android:layout_width="133dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="20dp"
@@ -48,25 +39,34 @@
                 android:outlineAmbientShadowColor="#ffffff"
                 android:src="@drawable/bot" />
 
+            <ImageButton
+                android:id="@+id/blt_voz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:background="@drawable/boton_shape"
+                app:srcCompat="@drawable/bluetooth" />
+
         </FrameLayout>
 
         <ImageButton
-            android:id="@+id/stop_voz"
+            android:id="@+id/stop"
             android:layout_width="134dp"
             android:layout_height="126dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/boton_shape"
             android:outlineAmbientShadowColor="#ffffff"
             android:scaleType="fitCenter"
             android:src="@drawable/stop"
-            app:layout_constraintEnd_toStartOf="@+id/start_voz"
-            app:layout_constraintStart_toEndOf="@+id/emergency_voz"
+            app:layout_constraintEnd_toStartOf="@+id/start"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/emergency"
             app:layout_constraintTop_toBottomOf="@+id/contenedor" />
 
         <ImageButton
-            android:id="@+id/emergency_voz"
+            android:id="@+id/emergency"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="10dp"
@@ -75,7 +75,7 @@
             android:background="@drawable/boton_shape"
             android:outlineAmbientShadowColor="#ffffff"
             android:src="@drawable/emergency"
-            app:layout_constraintEnd_toStartOf="@+id/stop_voz"
+            app:layout_constraintEnd_toStartOf="@+id/stop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/contenedor" />
 
@@ -83,15 +83,14 @@
             android:id="@+id/focovoz"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="59dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="151dp"
+            android:layout_marginEnd="29dp"
             android:background="@drawable/boton_shape"
             android:scaleType="fitCenter"
             android:src="@drawable/foco"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/Upvoz"
-            app:layout_constraintTop_toBottomOf="@+id/start_voz" />
+            app:layout_constraintStart_toStartOf="@+id/stop"
+            tools:layout_editor_absoluteY="338dp" />
 
         <SeekBar
             android:id="@+id/velocidad"
@@ -104,15 +103,16 @@
             android:layout_marginEnd="129dp"
             android:layout_marginBottom="177dp"
             android:background="@drawable/boton_shape"
-            android:backgroundTint="#C1D0CE"
             android:progressTint="#6EAADB"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Upvoz" />
+            app:layout_constraintTop_toBottomOf="@+id/Upvoz"
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageButton
-            android:id="@+id/start_voz"
+            android:id="@+id/start"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="15dp"
@@ -122,37 +122,34 @@
             android:outlineAmbientShadowColor="#ffffff"
             android:src="@drawable/go"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/stop_voz"
+            app:layout_constraintStart_toEndOf="@+id/stop"
             app:layout_constraintTop_toBottomOf="@+id/contenedor" />
 
         <ImageButton
             android:id="@+id/Upvoz"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="111dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginEnd="141dp"
+            android:layout_marginBottom="61dp"
             android:background="@drawable/boton_shape"
             android:scaleType="fitCenter"
             android:src="@drawable/arrowwhiteup"
             app:layout_constraintBottom_toTopOf="@+id/velocidad"
-            app:layout_constraintEnd_toStartOf="@+id/focovoz"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stop_voz" />
+            app:layout_constraintTop_toBottomOf="@+id/mic" />
 
         <ImageButton
             android:id="@+id/mic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="176dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="63dp"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/Upvoz"
-            app:layout_constraintEnd_toStartOf="@+id/focovoz"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/stop_voz"
+            app:layout_constraintTop_toBottomOf="@+id/stop"
             app:srcCompat="@drawable/mic" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
