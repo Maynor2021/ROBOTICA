@@ -11,8 +11,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#F2F2F2"
         tools:context=".MainActivity">
 
@@ -29,9 +29,9 @@
             android:src="@drawable/arrowwhitedown"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.907"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/velocidadvoz" />
+            app:layout_constraintTop_toBottomOf="@+id/velocidad" />
 
         <ImageButton
             android:id="@+id/start_voz"
@@ -57,7 +57,7 @@
             android:background="@drawable/boton_shape"
             android:outlineAmbientShadowColor="#ffffff"
             android:src="@drawable/arroleftwhite"
-            app:layout_constraintEnd_toStartOf="@+id/velocidadvoz"
+            app:layout_constraintEnd_toStartOf="@+id/velocidad"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emergency_voz" />
 
@@ -72,7 +72,7 @@
             android:outlineAmbientShadowColor="#ffffff"
             android:src="@drawable/arrowwhiteright"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/velocidadvoz"
+            app:layout_constraintStart_toEndOf="@+id/velocidad"
             app:layout_constraintTop_toBottomOf="@+id/stop_voz" />
 
         <ImageButton
@@ -84,7 +84,7 @@
             android:background="@drawable/boton_shape"
             android:outlineAmbientShadowColor="#ffffff"
             android:src="@drawable/arrowwhiteup"
-            app:layout_constraintBottom_toTopOf="@+id/velocidadvoz"
+            app:layout_constraintBottom_toTopOf="@+id/velocidad"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="parent"
@@ -160,7 +160,7 @@
             app:layout_constraintTop_toBottomOf="@+id/start_voz" />
 
         <SeekBar
-            android:id="@+id/velocidadvoz"
+            android:id="@+id/velocidad"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="153dp"
             android:layout_height="128dp"

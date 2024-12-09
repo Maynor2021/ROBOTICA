@@ -1,6 +1,8 @@
 package com.example.robotica.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.os.Vibrator;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.graphics.Color;
@@ -19,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -49,22 +52,10 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
     ImageButton down;
     ImageButton stop;
     ImageButton emergency;
-    ImageButton bluetooth;
+    ImageButton blt;
     ImageButton luces;
     ImageButton robot;
     SeekBar velocidad;
-
-    private BluetoothAdapter bluetoothAdapter;
-    private BluetoothSocket bluetoothSocket;
-    private BluetoothDevice hc05Device;
-    private OutputStream outputStream;
-    private ArrayList<String> deviceList = new ArrayList<>();
-    private ArrayAdapter<String> deviceListAdapter;
-    private static final int REQUEST_ENABLE_BT = 1;
-    private static final int REQUEST_PERMISSIONS_CODE = 1;
-    // UUID para HC-05
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
 
 
     PopupWindow popupWindow;
@@ -74,21 +65,35 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
     boolean arrowupstate = false;
     boolean arrowdownstate = false;
     boolean estado1 = false;
-
-
+    private BluetoothAdapter bluetoothAdapter;
+    private BluetoothSocket bluetoothSocket;
+    private BluetoothDevice hc05Device;
+    private OutputStream outputStream;
+    private ArrayList<String> deviceList = new ArrayList<>();
+    private ArrayAdapter<String> deviceListAdapter;
+    private static final int REQUEST_ENABLE_BT = 1;
+    private static final int REQUEST_PERMISSIONS_CODE = 1;
+    // UUID para HC-05
+// UUID para HC-05
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 //Mostrar el layout del fragmento
         View view = inflater.inflate(R.layout.fragment_control_vertical, container, false);
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
+        if (bluetoothAdapter == null)
+        {
             Toast.makeText(getContext(), "Bluetooth no es compatible con este dispositivo", Toast.LENGTH_SHORT).show();
             return view;
         }
-        if (!bluetoothAdapter.isEnabled()) {
+        if (!bluetoothAdapter.isEnabled())
+        {
+
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
+
         variables_botones(view);
         botones_acciones();
         velocidad();
@@ -104,10 +109,10 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         down = view.findViewById(R.id.downvertical);
         stop = view.findViewById(R.id.stop_voz);
         emergency = view.findViewById(R.id.emergency_voz);
-        bluetooth = view.findViewById(R.id.bluetooth_vertical);
+        blt = view.findViewById(R.id.bluetooth_vertical);
         luces = view.findViewById(R.id.focovoz);
         robot = view.findViewById(R.id.robotvoz);
-        velocidad = view.findViewById(R.id.velocidadvoz);
+        velocidad = view.findViewById(R.id.velocidad);
 
 
     }
@@ -121,12 +126,13 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         down.setOnClickListener(this);
         stop.setOnClickListener(this);
         luces.setOnClickListener(this);
-        emergency.setOnClickListener(this);
-        bluetooth.setOnClickListener(this);
+
         robot.setOnClickListener(this);
         velocidad.setOnClickListener(this);
 
         robot.setOnLongClickListener(this);
+        emergency.setOnLongClickListener(this);
+        blt.setOnLongClickListener(this);
 
     }
 
@@ -136,50 +142,62 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
         if (v==botonOn)
         {
             cambiar_imagen(botonOn);
+            sendData("E");
 
         }
         if (v == luces) {
             estado1 = !estado1;
             cambiar_imagen(luces);
             vibrarCorto();
+            sendData("F");
 
         }
         if (v == right) {
             cambiar_imagen(right);
 
             vibrarCorto();
+            sendData("A");
 
 
         }
         if (v == left) {
             cambiar_imagen(left);
             vibrarCorto();
+            sendData("D");
         }
         if (v == up) {
             cambiar_imagen(up);
             vibrarCorto();
+            sendData("W");
         }
         if (v == down) {
             cambiar_imagen(down);
             vibrarCorto();
+            sendData("S");
         }
         if (v == velocidad) {
             velocidad();
-            vibrarCorto();
+            vibrarlargo();
+            sendData("V");
         }
         if (v == stop) {
             cambiar_imagen(stop);
             vibrarlargo();
+            sendData("X");
         }
-        if (v == emergency) {
-            cambiar_imagen(emergency);
-            vibrarlargo();
-        }
+
         if (v == robot)
         {
             popup(robot);
             vibrarCorto();
         }
+        if (v == emergency)
+        {
+            popup(emergency);
+            vibrarCorto();
+            sendData("Y");
+        }
+
 
 
 
@@ -194,9 +212,13 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             vibrarlargo();
 
         }
-        if (view==bluetooth)
+
+        if (view== blt)
         {
-            discoverDevices();
+            String text;
+            text="texto";
+            System.out.println(text);
+            checkAndDiscoverDevices();
             vibrarlargo();
             return true;
         }
@@ -236,6 +258,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             up.setImageResource(R.drawable.arrowwhiteup);
             right.setImageResource(R.drawable.arrowwhiteright);
             down.setImageResource(R.drawable.arrowwhitedown);
+            luces.setImageResource(R.drawable.foco);
 
 
         }
@@ -306,6 +329,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
 
     }
 
+
     public void vibrarCorto() {
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator != null && vibrator.hasVibrator()) {
@@ -315,6 +339,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             vibrator.vibrate(vibracionDuracion);
         }
     }
+
 
     public void vibrarlargo() {
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
@@ -385,14 +410,24 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
 // Update background color based on progress
                 if (progress == 0) {
                     velocidad.setBackgroundColor(Color.RED);
+                    vibrarCorto();
+                    sendData("E");
                 }
                 if (progress >= 1 && progress < 25) {
                     velocidad.setBackgroundColor(Color.YELLOW);
+                    sendData("I");
+                    vibrarCorto();
                 } else if (progress >= 25 && progress < 50) {
                     velocidad.setBackgroundColor(Color.parseColor("#FFA500")); // Orange
+                    vibrarCorto();
+                    sendData("J");
                 } else if (progress >= 50 && progress < 75) {
                     velocidad.setBackgroundColor(Color.GREEN);
+                    vibrarCorto();
+                    sendData("K");
+
                 } else if (progress >= 100) {
+                    sendData("L");
                     velocidad.setBackgroundColor(Color.BLUE);
                 }
             }
@@ -408,7 +443,8 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             }
         });
     }
-    private boolean hasPermissions (Context context)
+
+    private boolean hasPermissions(Context context)
     {
         return ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_ADMIN) == PackageManager.PERMISSION_GRANTED &&
@@ -417,8 +453,7 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
                 ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED;
     }
-
-    private void requestPermissions ()
+    private void requestPermissions()
     {
         ActivityCompat.requestPermissions(getActivity(),
                 new String[]{Manifest.permission.BLUETOOTH,
@@ -427,23 +462,31 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
                         Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.BLUETOOTH_CONNECT,
                         Manifest.permission.BLUETOOTH_SCAN},
+
                 REQUEST_PERMISSIONS_CODE);
     }
-    private void checkAndDiscoverDevices ()
+    private void checkAndDiscoverDevices()
     {
-        if (hasPermissions(requireContext())) {
+        if (hasPermissions(requireContext()))
+        {
             discoverDevices();
-        } else {
+        }
+        else
+        {
             requestPermissions();
         }
     }
-    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+    private final BroadcastReceiver receiver = new BroadcastReceiver()
+    {
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, Intent intent)
+        {
             String action = intent.getAction();
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+            if (BluetoothDevice.ACTION_FOUND.equals(action))
+            {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED)
+                {
 // TODO: Consider calling
 // ActivityCompat#requestPermissions
 // here to request the missing permissions, and then overriding
@@ -453,16 +496,13 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
 // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
+
                 deviceList.add(device.getName() + "\n" + device.getAddress());
                 deviceListAdapter.notifyDataSetChanged();
             }
         }
     };
-
-
-
-    private void discoverDevices ()
-    {
+    private void discoverDevices() {
         deviceList.clear();
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
 // TODO: Consider calling
@@ -501,15 +541,18 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
 //Actualizado para fragmento
             requireContext().unregisterReceiver(receiver);
         });
+
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    private void connectToDevice (String address)
+    private void connectToDevice(String address)
     {
         hc05Device = bluetoothAdapter.getRemoteDevice(address);
-        try {
-            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+        try
+        {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED)
+            {
 // TODO: Consider calling
 // ActivityCompat#requestPermissions
 // here to request the missing permissions, and then overriding
@@ -523,51 +566,73 @@ public class control_vertical extends Fragment implements View.OnClickListener, 
             bluetoothSocket.connect();
             outputStream = bluetoothSocket.getOutputStream();
             Toast.makeText(requireContext(), "Connected to HC-05", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
             Toast.makeText(requireContext(), "Connection failed", Toast.LENGTH_SHORT).show();
         }
     }
-
-    ///aqui va sendata/////////////////////////////////////////////////////////
-    public void sendData (String data)
+    public void sendData(String data)
     {
-        if (outputStream != null) {
-            try {
+        if (outputStream != null)
+        {
+            try
+            {
                 outputStream.write(data.getBytes());
                 Toast.makeText(requireContext(), "Data sent", Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
                 Toast.makeText(requireContext(), "Failed to send data", Toast.LENGTH_SHORT).show();
             }
-        } else {
+        }
+        else
+        {
             Toast.makeText(requireContext(), "Not connected to HC-05", Toast.LENGTH_SHORT).show();
         }
     }
-
-
     @Override
-    public void onRequestPermissionsResult ( int requestCode, String[] permissions,
-                                             int[] grantResults)
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_PERMISSIONS_CODE) {
+
+        if (requestCode == REQUEST_PERMISSIONS_CODE)
+        {
             boolean allPermissionsGranted = true;
-            for (int result : grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
+            for (int result : grantResults)
+            {
+                if (result != PackageManager.PERMISSION_GRANTED)
+                {
                     allPermissionsGranted = false;
                     break;
                 }
             }
-            if (allPermissionsGranted) {
+            if (allPermissionsGranted)
+            {
 //Permisos concedidos, ejecutar el método discoverDevices
                 discoverDevices();
-            } else {
+            }
+            else
+            {
 //Permisos no concedidos
                 Toast.makeText(requireContext(), "Permissions required to use Bluetooth", Toast.LENGTH_SHORT).show();
             }
         }
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

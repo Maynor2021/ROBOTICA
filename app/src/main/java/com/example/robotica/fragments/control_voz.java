@@ -2,7 +2,6 @@ package com.example.robotica.fragments;
 
 import static android.app.Activity.RESULT_OK;
 import static android.widget.Toast.makeText;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -30,10 +29,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.os.Vibrator;
 import android.speech.RecognizerIntent;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -41,15 +37,10 @@ import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.robotica.R;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.UUID;
 
 public class control_voz extends Fragment implements View.OnClickListener, View.OnLongClickListener
@@ -105,14 +96,14 @@ public class control_voz extends Fragment implements View.OnClickListener, View.
     //Metodo donde se asignan los elementos de la interfaz de usuario a las variables definidas
     private void variables_botones(View view)
     {
-        robot = view.findViewById(R.id.robotvoz);
-        bluetooth = view.findViewById(R.id.bluetooth_vertical);
-        estop = view.findViewById(R.id.stop_voz);
-        stop = view.findViewById(R.id.stop_voz);
-        start = view.findViewById(R.id.start_voz);
+        robot = view.findViewById(R.id.robot);
+        bluetooth = view.findViewById(R.id.blt_voz);
+        estop = view.findViewById(R.id.stop);
+
+        start = view.findViewById(R.id.start);
         voz = view.findViewById(R.id.mic);
         luces = view.findViewById(R.id.focovoz);
-        velocidad = view.findViewById(R.id.velocidadvoz);
+        velocidad = view.findViewById(R.id.velocidad);
         icono=view.findViewById(R.id.Upvoz);
     }
     //Metodo para detectar los botones presionados
@@ -137,6 +128,12 @@ public class control_voz extends Fragment implements View.OnClickListener, View.
     {
         if (v == bluetooth)
         {
+            vibracio.vibrarCorto();
+            checkAndDiscoverDevices();
+        }
+        if (v == estop)
+        {
+            cambiar_imagenes(estop);
 
         }
         if (v == stop)
@@ -161,11 +158,7 @@ public class control_voz extends Fragment implements View.OnClickListener, View.
     @Override
     public boolean onLongClick(View v)
     {
-        if (v == bluetooth)
-        {
-            discoverDevices();
-           vibracio.vibrarCorto();
-        }
+
 
         if (v == estop)
         {

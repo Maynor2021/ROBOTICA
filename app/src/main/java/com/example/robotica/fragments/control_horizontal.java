@@ -5,8 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Vibrator;
 import android.view.Gravity;
@@ -26,6 +24,7 @@ import com.example.robotica.R;
 public class control_horizontal extends Fragment implements View.OnClickListener, View.OnLongClickListener {
     ImageButton botonOn;
     ImageButton botonOff;
+    ImageButton close;
     ImageButton up;
     ImageButton left;
     ImageButton right;
@@ -73,7 +72,7 @@ public class control_horizontal extends Fragment implements View.OnClickListener
         bluetooth = view.findViewById(R.id.bluetooth_vertical);
         luces=view.findViewById(R.id.focovoz);
         robot=view.findViewById(R.id.robotvoz);
-        velocidad=view.findViewById(R.id.velocidadvoz);
+        velocidad=view.findViewById(R.id.velocidad);
 
 
 
@@ -323,5 +322,17 @@ public class control_horizontal extends Fragment implements View.OnClickListener
             }
         });
     }
+
+    public void vibrarlargo2() {
+        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator != null && vibrator.hasVibrator()) {
+            // Duración de la vibración en milisegundos
+            final int vibracionDuracion = 300;
+            // Hacer vibrar el dispositivo
+            vibrator.vibrate(vibracionDuracion);
+        }
+    }
+
+
 
 }

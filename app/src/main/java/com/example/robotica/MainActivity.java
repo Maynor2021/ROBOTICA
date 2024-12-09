@@ -78,7 +78,10 @@ public class MainActivity extends AppCompatActivity
                 }
             }
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) { }
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+
+            }
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
@@ -96,6 +99,13 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        tablayout.getTabAt(0).setIcon(R.drawable.horizontal);
+        tablayout.getTabAt(1).setIcon(R.drawable.vertizal);
+        tablayout.getTabAt(2).setIcon(R.drawable.voz);
+
+
+
     }
 
 }
